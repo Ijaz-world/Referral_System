@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Referral System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <h2>Referral System</h2>
+            <nav>
+                <a href="{{ url_for('dashboard') }}" class="active">Dashboard</a>
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </nav>
+        </div>
+        
+        <div class="main-content">
+            <div class="header">
+                <h1>Welcome to Your Dashboard</h1>
+            </div>
+            
+            {% if referral_reward %}
+            <div class="alert alert-success">
+                <h3>🎉 Congratulations!</h3>
+                <p>You have earned Rs.{{ referral_reward }} for referring a friend!</p>
+            </div>
+            {% endif %}
+            
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3>Your Referral Code</h3>
+                    <div class="code-display">{{ referral_code }}</div>
+                    <p class="share-text">Share this with friends</p>
+                    <button onclick="copyReferralCode()" class="btn btn-secondary">Copy Code</button>
+                </div>
+                
+                <div class="card">
+                    <h3>Total Earnings</h3>
+                    <div class="amount">Rs.{{ rewards.total_earned if rewards else 0 }}</div>
+                    <p>Lifetime earnings</p>
+                </div>
+                
+            </div>
+            
+            <div class="referral-history">
+                <h2>Referral History</h2>
+                {% if referrals %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Referred Friend</th>
+                            <th>Reward Earned</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for referral in referrals %}
+                        <tr>
+                            <td>{{ referral.referral_date.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ referral.referred_name }}</td>
+                            <td class="reward-amount">Rs.{{ referral.reward_amount }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="no-data">No referrals yet. Share your code to start earning!</p>
+                {% endif %}
+            </div>
+            
+            <div class="instructions-box">
+                <h3>How to Earn More:</h3>
+                <ol>
+                    <li>1st referral: Rs.500</li>
+                    <li>2nd referral: Rs.400</li>
+                    <li>3rd referral: Rs.300</li>
+                    <li>4th referral: Rs.200</li>
+                    <li>5th referral: Rs.100</li>
+                    <li>After 5 referrals: Rewards end</li>
+                </ol>
+                <p>Share your referral code on social media, WhatsApp, or email!</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function copyReferralCode() {
+            const code = "{{ referral_code }}";
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Referral code copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>

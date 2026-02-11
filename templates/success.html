@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="success-container">
+            <div class="success-icon">✓</div>
+            <h1>Congratulations, {{ name }}!</h1>
+            <p>Your registration was successful!</p>
+            
+            <div class="referral-code-box">
+                <h3>Your Referral Code:</h3>
+                <div class="code-display">{{ referral_code }}</div>
+                <p>Share this code with friends to earn rewards!</p>
+            </div>
+            
+            <div class="instructions">
+                <h3>Next Steps:</h3>
+                <ul>
+                    <li>Share your referral code with friends</li>
+                    <li>Earn Rs.500 for each friend who signs up using your code</li>
+                    <li>Track your earnings in your dashboard</li>
+                </ul>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

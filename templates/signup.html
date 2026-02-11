@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Referral System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Create Account</h1>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" action="{{ url_for('signup') }}">
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="referral_code">Referral Code (Optional):</label>
+                    <input type="text" id="referral_code" name="referral_code">
+                    <small>Enter friend's referral code to help them earn rewards</small>
+                    <div id="referral-message" class="message"></div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+            
+            <p class="login-link">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('referral_code').addEventListener('input', function() {
+            const code = this.value.trim();
+            const messageDiv = document.getElementById('referral-message');
+            
+            if (code.length === 8) {
+                fetch(`/check_reward/${code}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.valid) {
+                            messageDiv.innerHTML = `<span class="success">${data.message}</span>`;
+                        } else {
+                            messageDiv.innerHTML = `<span class="error">${data.message}</span>`;
+                        }
+                    });
+            } else if (code.length > 0) {
+                messageDiv.innerHTML = '<span class="error">Referral code must be 8 characters</span>';
+            } else {
+                messageDiv.innerHTML = '';
+            }
+        });
+    </script>
+</body>
+</html>

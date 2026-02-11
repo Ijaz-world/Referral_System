@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Referral System</h1>
+        <p>Earn money by referring friends!</p>
+        
+        <div class="cta-buttons">
+            <a href="{{ url_for('signup') }}" class="btn btn-primary">Sign Up Now</a>
+            <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+        </div>
+        
+        <div class="info-box">
+            <h2>How it works:</h2>
+            <ul>
+                <li>Sign up and get your unique referral code</li>
+                <li>Share your code with friends</li>
+                <li>Earn Rs.500 for 1st referral</li>
+                <li>Earn Rs.400 for 2nd referral</li>
+                <li>Earn Rs.300 for 3rd referral</li>
+                <li>Earn Rs.200 for 4th referral</li>
+                <li>Earn Rs.100 for 5th referral</li>
+                <li>Maximum 5 referrals with rewards</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
