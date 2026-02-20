@@ -3,37 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Referral System</title>
+    <title>Login | Dream Weavers</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin: 0;
+        }
+        .login-card { 
+            background: white; 
+            padding: 2.5rem; 
+            border-radius: 1rem; 
+            box-shadow: var(--card-shadow); 
+            width: 100%; 
+            max-width: 400px; 
+            border: 1px solid #e2e8f0; 
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        .footer-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <h1>Login</h1>
-            
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            
-            <form method="POST" action="{{ url_for('login') }}">
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-            
-            <p class="signup-link">Don't have an account? <a href="{{ url_for('signup') }}">Sign up here</a></p>
+    <div class="login-card">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2 style="margin-bottom: 0.5rem; color: var(--text-main);">Dream Weavers</h2>
+            <p style="color: var(--text-muted);">Welcome back! Please login.</p>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" style="font-size: 0.875rem; margin-bottom: 1rem;">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('login') }}">
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">Email</label>
+                <input type="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">Password</label>
+                <input type="password" name="password"  required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; background: #4f46e5;">Sign In</button>
+        </form>
+
+        <div class="footer-link">
+            Don't have an account? <a href="{{ url_for('signup') }}">Join Now</a>
         </div>
     </div>
 </body>

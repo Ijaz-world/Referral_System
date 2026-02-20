@@ -3,5 +3,5 @@ class Config:
     MYSQL_HOST = 'localhost'
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = 'ijaz123'
-    MYSQL_DB = 'referral_system'
+    MYSQL_DB = 'referral_system_new'
     MYSQL_CURSORCLASS = 'DictCursor'

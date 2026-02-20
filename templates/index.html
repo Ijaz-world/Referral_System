@@ -3,32 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Referral System</title>
+    <title>Dream Weavers | Referral System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Modern Navigation Bar */
+        .navbar {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.1); /* Glass effect */
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 25px; /* Added significant space between buttons */
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .btn-join {
+            background: white;
+            color: #4f46e5 !important;
+            padding: 10px 24px;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-join:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Hero and Grid adjustments */
+        .hero-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+        .hero-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+        .hero-subtitle { font-size: 1.25rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 50px; }
+        .step-card { background: white; padding: 40px 30px; border-radius: 1.5rem; box-shadow: var(--shadow); color: var(--text-main); transition: transform 0.3s; }
+        .step-card:hover { transform: translateY(-10px); }
+        .step-num { background: #4f46e5; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: bold; font-size: 1.2rem; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Referral System</h1>
-        <p>Earn money by referring friends!</p>
-        
-        <div class="cta-buttons">
-            <a href="{{ url_for('signup') }}" class="btn btn-primary">Sign Up Now</a>
-            <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+    <nav class="navbar">
+        <a href="{{ url_for('index') }}" class="nav-brand">
+            <span>✨</span> Dream Weavers
+        </a>
+        <div class="nav-actions">
+            <a href="{{ url_for('login') }}" class="nav-link">Login</a>
+            <a href="{{ url_for('signup') }}" class="btn-join">Join Now</a>
         </div>
+    </nav>
+
+    <header class="hero-section">
+        <h1 class="hero-title">Refer Friends, <br><span style="text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3);">Earn Money.</span></h1><br>
         
-        <div class="info-box">
-            <h2>How it works:</h2>
-            <ul>
-                <li>Sign up and get your unique referral code</li>
-                <li>Share your code with friends</li>
-                <li>Earn Rs.500 for 1st referral</li>
-                <li>Earn Rs.400 for 2nd referral</li>
-                <li>Earn Rs.300 for 3rd referral</li>
-                <li>Earn Rs.200 for 4th referral</li>
-                <li>Earn Rs.100 for 5th referral</li>
-                <li>Maximum 5 referrals with rewards</li>
-            </ul>
+        <div style="margin-top: 20px;">
+            <a href="{{ url_for('signup') }}" class="btn-join" style="padding: 18px 45px; font-size: 1.1rem; background: white;">Get Started Today</a>
         </div>
-    </div>
+
+        <div class="features-grid">
+            <div class="step-card">
+                <div class="step-num">1</div>
+                <h3 style="color: #4f46e5; font-size: 1.5rem;">Create Account</h3>
+                <p style="color: var(--text-muted); margin-top: 15px;">Secure your spot in the Dream Weavers ecosystem in under 60 seconds.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">2</div>
+                <h3 style="color: #4f46e5; font-size: 1.5rem;">Share the Magic</h3>
+                <p style="color: var(--text-muted); margin-top: 15px;">Use your unique dashboard to share your code via WhatsApp or Social Media.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">3</div>
+                <h3 style="color: #4f46e5; font-size: 1.5rem;">Instant Rewards</h3>
+                <p style="color: var(--text-muted); margin-top: 15px;">Watch your balance grow. Withdraw your earnings directly to your account.</p>
+            </div>
+        </div>
+    </header>
 </body>
 </html>
